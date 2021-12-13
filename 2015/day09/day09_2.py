@@ -29,11 +29,11 @@ def find_shortest_path(graph, starting, depth=0):
 
     cons = graph[starting]
 
-    min_dist = 2e6
+    min_dist = 0
     for con in list(filter(lambda b : b in graph, cons.keys())):        
-        min_dist = min(min_dist, find_shortest_path(new_graph, con, depth+1) + cons[con])
+        min_dist = max(min_dist, find_shortest_path(new_graph, con, depth+1) + cons[con])
 
-    assert(min_dist != 2e6)
+    assert(min_dist != 0)
     return min_dist
 
 
@@ -43,4 +43,4 @@ for starting in graph.keys():
     dist = find_shortest_path(graph, starting)
     dists.append(dist)
 
-print(f"The distance of the shortest route is {min(dists)}.")
+print(f"The distance of the longest route is {max(dists)}.")
